@@ -3,6 +3,9 @@
        <el-row>
            <a href="#/echarts/china-map-samples">中国地图</a>
        </el-row>
+        <el-row>
+            <a href="#/echarts/china-map-line-samples">中国地图-迁徙图</a>
+        </el-row>
     </div>
 </template>
 

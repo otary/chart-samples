@@ -35,7 +35,7 @@
                         realtime: false,
                         calculable: false,
                         startAngle: 0,
-                       /* color: [],*/
+                        /* color: [],*/
                         orient: 'horizontal',
                         itemWidth: '15',
                         itemHeight: '120',
@@ -43,9 +43,27 @@
                         bottom: 20,
                         precision: 4 // 数据展示的小数精度
                     },
-                    geo: { // 这个是重点配置区
+                    visualMap: { //颜色轴，可以根据数据点的值大小，展示不同的颜色，或用来展示地图块的不同颜色
+                        type: 'piecewise',// 映射组件类型(1、piecewise--分段型;2、continuous--连续型)
+                        calculable: true,
+                        inRange: {
+                            color: ["#3dda8e", "#eac736", "#d94e5d"]  //数据段范围颜色
+                        },
+                        textStyle: {
+                            color: "#fff"
+                        },
+                        pieces: [  //地图左下角显示可视化
+                            {min: 10000, color: '#D1241A'}, // 不指定 max，表示 max 为无限大（Infinity）
+                            {min: 1000, max: 9999, color: '#F27152'},
+                            {min: 100, max: 999, color: '#F28E52'},
+                            {min: 10, max: 99, color: '#F2B252'},
+                            {min: 1, max: 9, color: '#A5A5A5'},
+                            {value: 0}, // 表示 value 等于 0 的情况
+                        ]
+                    },
+                    geo: { // geo配置方式
                         map: 'china', // 中国地图
-                        roam: true,
+                        roam: true, // 是否可以点击鼠标、滚轮缩放
                         z: '2',
                         scaleLimit: {  // 缩放配置
                             min: 1.1,
@@ -65,7 +83,7 @@
                                 areaColor: '#0E4E96' // 地图背景色
                             },
                             emphasis: {  //鼠标滑过地图高亮的相关设置
-                                /*areaColor: null,*/
+                                areaColor: 'red',
                                 shadowOffsetX: 0,
                                 shadowOffsetY: 0,
                                 shadowBlur: 20,
@@ -77,27 +95,77 @@
                         },
                     },
                     series: [{
+                        name: '点',
                         type: 'scatter',
-                        coordinateSystem: 'geo' // 对应上方配置
-                    }, {
-                        name: '', // 浮动框的标题
-                        type: 'map',
-                        geoIndex: 0,
-                        data: []
-                    }],
-                    visualMap: [{
-                        splitList: [
-                            {start: 500},
-                            {start: 101, end: 499},
-                            {start: 0, end: 100},
-                        ],
-                        seriesIndex: [0],
-                        show: false,
-                        textStyle: {
-                            color: '#fff'
+                        coordinateSystem: 'geo',
+                        markPoint: {
+                            // 此数据源为定位点数据
+                            data: [{
+                                name: "地点1",
+                                value: '',
+                                symbol: 'pin',
+                                symbolSize: 50, // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
+                                coord: [119.88, 29.93] //必须加坐标
+                            },{
+                                name: "地点2",
+                                value: '',
+                                symbol: 'pin',
+                                symbolSize: 50, // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
+                                coord: [129.88, 49.93] //必须加坐标
+                            }],
+                        }
+                    },{
+                        name: '点',
+                        type: 'scatter',
+                        coordinateSystem: 'geo',
+                        markPoint: {
+                            symbolOffset: [0, '-60%'],
+                            // 此数据源为定位点数据
+                            data: [{
+                                name: "地点1",
+                                value: '',
+                                symbol: 'image://https://t7.baidu.com/it/u=3204887199,3790688592&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1593597287&t=cf74fea4f329a9a082a249010296d82a',
+                                symbolSize: 100, // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
+                                coord: [119.88, 29.93] //必须加坐标
+                            },{
+                                name: "地点2",
+                                value: '',
+                                symbol: 'image://https://t7.baidu.com/it/u=3204887199,3790688592&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1593597287&t=cf74fea4f329a9a082a249010296d82a',
+                                symbolSize: 120, // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
+                                coord: [129.88, 49.93] //必须加坐标
+                            }],
                         },
-                        hoverLink: false,
-                        color: ['rgb(208,127,134)', 'rgb(28,84,145)', 'rgb(49,117,188)']
+                        label: {
+                            normal: {
+                                show: true,
+                                textStyle: {
+                                    color: '#fff',
+                                    fontSize: 9
+                                }
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                color: '#F62157', //标志颜色
+                                borderWidth: 10,
+                                label: {
+                                    show: false
+                                },
+                                borderColor: 'red',
+                                borderRadius: 190
+                            },
+                            emphasis: {
+                                borderColor: '#1e90ff',
+                                borderWidth: 20,
+                                label: {
+                                    show: true
+                                }
+                            }
+                        },
+                        effect: {
+                            show: true,
+                            shadowBlur: 0
+                        }
                     }],
                 }
             }

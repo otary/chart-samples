@@ -10,5 +10,11 @@ export default new Router({
     },{
         path: '/echarts/china-map-samples',
         component: () => import('@/views/echarts/ChinaMapSamples')
+    },{
+        path: '/echarts/china-map-line-samples',
+        component: () => import('@/views/echarts/ChinaMapLineSamples')
+    },{
+        path: '/test',
+        component: () => import('@/views/echarts/Test')
     }]
 })
