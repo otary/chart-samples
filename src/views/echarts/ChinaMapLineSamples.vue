@@ -62,7 +62,7 @@
                             {value: 0}, // 表示 value 等于 0 的情况
                         ]
                     },
-                   /* geo: { // geo配置方式, 简单
+                    geo: { // geo配置方式, 简单
                         map: 'china', // 中国地图
                         roam: true,
                         z: '2',
@@ -94,7 +94,7 @@
                                 shadowColor: 'rgba(0, 0, 0, 0.5)'
                             }
                         }
-                    },*/
+                    },
                     series: [{
                         name: '迁徙线',
                         type: 'lines',
@@ -160,40 +160,6 @@
                             value: [109.1162, 34.2004, 150]
                         }]
 
-                    }, {
-                        name: '点',
-                        type: 'scatter',
-                        coordinateSystem: 'geo',
-                        symbol: 'pin', //气泡
-                        symbolSize: 130,
-                        markPoint: {
-                            symbol: 'pin', //气泡
-                            symbolSize: 130,
-                            data: [{
-                                name: '广西',
-                                value: 'image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7'
-                            }]
-                        },
-                        label: {
-                            normal: {
-                                show: true,
-                                textStyle: {
-                                    color: '#fff',
-                                    fontSize: 9,
-                                }
-                            }
-                        },
-                        itemStyle: {
-                            normal: {
-                                color: '#F62157', //标志颜色
-                            }
-                        },
-                        data: [{  // 标点位置信息
-                            name: '广西',
-                            //value: 'image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7',
-                            //value: [123.4543, 'image://data:image/gif;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o/XBs/fNwfjZ0frl3/zy7////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAkAABAALAAAAAAQABAAAAVVICSOZGlCQAosJ6mu7fiyZeKqNKToQGDsM8hBADgUXoGAiqhSvp5QAnQKGIgUhwFUYLCVDFCrKUE1lBavAViFIDlTImbKC5Gm2hB0SlBCBMQiB0UjIQA7', 95]
-                            value: [123.4543, 30, 12]
-                        }]
                     }]
                 },
 
@@ -587,31 +553,6 @@
         mounted() {
             this.chinaMapChart = echarts.init(this.$refs.chinaMapChart);
             this.chinaMapChart.setOption(this.defaultMapOptions);
-
-            /* 高亮区域，不生效*/
-            this.chinaMapChart.dispatchAction({
-                type: 'mapSelect',
-                // 可选，系列 index，可以是一个数组指定多个系列
-                seriesIndex: 0,
-                // 可选，系列名称，可以是一个数组指定多个系列
-                // seriesName: string|Array,
-                // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据
-                // dataIndex: number,
-                // 可选，数据名称，在有 dataIndex 的时候忽略
-                name: '贵州'
-            });
-
-            /* 不生效 */
-            this.chinaMapChart.dispatchAction({
-                type: 'downplay', // 取消高亮指定的数据图形
-                seriesIndex: 0
-            })
-            this.chinaMapChart.dispatchAction({
-                type: 'highlight',
-                // seriesIndex: 0,
-                name: '福建'
-            });
-
 
             // 下钻
             this.chinaMapChart.on("click", p => {

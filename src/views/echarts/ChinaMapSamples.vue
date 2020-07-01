@@ -93,45 +93,77 @@
                                 shadowColor: 'rgba(0, 0, 0, 0.5)'
                             }
                         },
+                        regions: [{ // 对不同地区给予不同的颜色
+                            name: '福建',
+                            itemStyle: {
+                                normal: {
+                                    areaColor: '#fbd8f3'
+                                }
+                            }
+                        },{
+                            name: '湖北',
+                            itemStyle: {
+                                normal: {
+                                    areaColor: '#73b323'
+                                }
+                            }
+                        }]
                     },
-                    series: [{
+                    series: [{  // 气泡
                         name: '点',
                         type: 'scatter',
                         coordinateSystem: 'geo',
-                        markPoint: {
-                            // 此数据源为定位点数据
-                            data: [{
-                                name: "地点1",
-                                value: '',
-                                symbol: 'pin',
-                                symbolSize: 50, // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
-                                coord: [119.88, 29.93] //必须加坐标
-                            },{
-                                name: "地点2",
-                                value: '',
-                                symbol: 'pin',
-                                symbolSize: 50, // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
-                                coord: [129.88, 49.93] //必须加坐标
-                            }],
-                        }
-                    },{
+                        symbol: 'pin',
+                        symbolSize: 50,
+                        hoverAnimation: true,
+                        data: [{
+                            value: [113.54909,22.198951]
+                        }]
+                    }, {  // 圆点
                         name: '点',
                         type: 'scatter',
                         coordinateSystem: 'geo',
+                        symbol: 'circle',
+                        symbolSize: 50,
+                        hoverAnimation: true,
+                        itemStyle: {
+                            normal: {
+                                color: '#99cbfc'
+                            }
+                        },
+                        data: [{
+                            value: [119.767413,33.041544]
+                        }]
+                    },{  // 点扩散效果
+                        name: '点',
+                        type: 'effectScatter',
+                        coordinateSystem: 'geo',
+                        rippleEffect: {
+                            scale: 10,
+                            brushType: "stroke"
+                        },
+                        hoverAnimation: true,
+                        data: [{
+                            value: [116.617345,39.8938430000001]
+                        }]
+                    }, {  // 图片
+                        name: '图片点',
+                        type: 'scatter',
+                        coordinateSystem: 'geo',
                         markPoint: {
-                            symbolOffset: [0, '-60%'],
+                            // symbolOffset: [0, '-60%'],
                             // 此数据源为定位点数据
                             data: [{
-                                name: "地点1",
+                                name: "图片点",
                                 value: '',
                                 symbol: 'image://https://t7.baidu.com/it/u=3204887199,3790688592&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1593597287&t=cf74fea4f329a9a082a249010296d82a',
-                                symbolSize: 100, // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
+                                symbolSize: 50, // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
                                 coord: [119.88, 29.93] //必须加坐标
                             },{
-                                name: "地点2",
+                                name: "图片点",
                                 value: '',
                                 symbol: 'image://https://t7.baidu.com/it/u=3204887199,3790688592&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg?sec=1593597287&t=cf74fea4f329a9a082a249010296d82a',
-                                symbolSize: 120, // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
+                                symbolSize: 50, // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
                                 coord: [129.88, 49.93] //必须加坐标
                             }],
                         },
